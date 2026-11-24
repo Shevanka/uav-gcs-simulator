@@ -1,0 +1,51 @@
+{
+  "network": {
+    "host": "127.0.0.1",
+    "port": 50051,
+    "buffer_size": 4096,
+    "timeout_seconds": 5.0
+  },
+  "simulation": {
+    "update_interval_sec": 1.0,
+    "initial_latitude": -7.2756,
+    "initial_longitude": 112.7949,
+    "initial_altitude": 0.0,
+    "target_altitude": 120.0,
+    "cruising_speed": 15.0,
+    "battery_capacity_percent": 100.0,
+    "battery_drain_rate_per_sec": 0.15,
+    "system_id": 1,
+    "component_id": 1,
+    "flight_modes": [
+      "MANUAL",
+      "STABILIZE",
+      "ALT_HOLD",
+      "AUTO",
+      "LOITER",
+      "RTL",
+      "LAND"
+    ]
+  },
+  "thresholds": {
+    "battery": {
+      "normal_min": 75.0,
+      "warning_min": 40.0,
+      "critical_min": 20.0,
+      "emergency_min": 0.0
+    },
+    "altitude": {
+      "min_operational": 0.0,
+      "max_operational": 500.0,
+      "hard_max": 10000.0
+    },
+    "speed": {
+      "max_speed": 50.0
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "log_dir": "logs",
+    "format": "jsonl",
+    "file_prefix": "telemetry"
+  }
+}
