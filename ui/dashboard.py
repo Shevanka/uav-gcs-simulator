@@ -199,6 +199,10 @@ class GCSDashboard(QMainWindow):
         scroll_left.setWidget(left_container)
         scroll_left.setWidgetResizable(True)
         scroll_left.setFrameShape(QFrame.Shape.NoFrame)
+        # Keep the scroll area and its viewport on the dark theme (default is a light palette)
+        scroll_left.setStyleSheet("QScrollArea { background: transparent; }")
+        scroll_left.viewport().setStyleSheet("background: transparent;")
+        left_container.setStyleSheet("background: transparent;")
         splitter.addWidget(scroll_left)
 
         # Right Column: Map & Strip Charts + Link Status & Alert Table

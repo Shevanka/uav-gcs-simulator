@@ -42,7 +42,8 @@ class FlightMapCanvas(QWidget):
         layout.setSpacing(6)
 
         # Matplotlib Figure with 2 Subplots (Top: GPS Map, Bottom: Altitude/Battery)
-        self.fig = Figure(figsize=(6, 6), facecolor="#181825")
+        # Constrained layout recomputes spacing on every draw, so titles and labels never overlap on resize
+        self.fig = Figure(figsize=(6, 6), facecolor="#181825", layout="constrained")
         self.canvas = FigureCanvas(self.fig)
         self.canvas.setStyleSheet("background-color: transparent;")
 
@@ -54,10 +55,8 @@ class FlightMapCanvas(QWidget):
         self.ax_alt = self.fig.add_subplot(2, 1, 2)
         self._style_axis(self.ax_alt, "ALTITUDE & BATTERY HISTORY", "Simulation Steps", "Altitude (m)")
         self.ax_bat = self.ax_alt.twinx()
-        self.ax_bat.set_ylabel("Battery (%)", color="#a6e3a1", fontsize=9)
-        self.ax_bat.tick_params(colors="#a6e3a1", labelsize=8)
+        self._style_battery_axis()
 
-        self.fig.tight_layout(pad=2.0)
         layout.addWidget(self.canvas)
 
     def _style_axis(self, ax, title: str, xlabel: str, ylabel: str) -> None:
@@ -136,13 +135,19 @@ class FlightMapCanvas(QWidget):
             self.ax_map.set_ylim(curr_lat - margin, curr_lat + margin)
             self.ax_map.ticklabel_format(useOffset=False, style="plain")
 
+    def _style_battery_axis(self) -> None:
+        """Style the right-hand battery axis (clear() resets a twinx axis back to the left side)."""
+        self.ax_bat.yaxis.tick_right()
+        self.ax_bat.yaxis.set_label_position("right")
+        self.ax_bat.set_ylabel("Battery (%)", color="#a6e3a1", fontsize=9)
+        self.ax_bat.tick_params(colors="#a6e3a1", labelsize=8)
+
     def _render_charts(self) -> None:
         """Render altitude and battery progression."""
         self.ax_alt.clear()
         self.ax_bat.clear()
         self._style_axis(self.ax_alt, "ALTITUDE & BATTERY HISTORY", "Simulation Steps", "Altitude (m)")
-        self.ax_bat.set_ylabel("Battery (%)", color="#a6e3a1", fontsize=9)
-        self.ax_bat.tick_params(colors="#a6e3a1", labelsize=8)
+        self._style_battery_axis()
 
         if len(self.time_indices) > 0:
             times = list(self.time_indices)
@@ -170,4 +175,5 @@ class FlightMapCanvas(QWidget):
         self.ax_bat.clear()
         self._style_axis(self.ax_map, "UAV GPS 2D FLIGHT PATH", "Longitude (°)", "Latitude (°)")
         self._style_axis(self.ax_alt, "ALTITUDE & BATTERY HISTORY", "Simulation Steps", "Altitude (m)")
+        self._style_battery_axis()
         self.canvas.draw_idle()

@@ -8,6 +8,10 @@
 
 A high-fidelity, modular desktop Ground Control Station (GCS) and UAV simulation environment built in Python. Designed for studying, testing, and verifying real-time telemetry communication, anomaly detection, fail-safe protocols, and flight path tracking over UDP network sockets.
 
+![GCS Dashboard](docs/images/dashboard.png)
+
+*Live dashboard: the simulator and the GCS receiver running together over UDP (`python main.py --mode all`).*
+
 ---
 
 ## 📌 Table of Contents
