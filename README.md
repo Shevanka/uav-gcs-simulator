@@ -2,7 +2,7 @@
 
 [![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
 [![GUI](https://img.shields.io/badge/GUI-PySide6%20(Qt6)-brightgreen.svg)](https://www.qt.io/qt-for-python)
-[![Tests](https://img.shields.io/badge/tests-pytest%20103%20passed-success.svg)](https://docs.pytest.org/)
+[![Tests](https://img.shields.io/badge/tests-pytest%20104%20passed-success.svg)](https://docs.pytest.org/)
 [![Coverage](https://img.shields.io/badge/coverage-85%25-green.svg)](https://github.com/pytest-dev/pytest-cov)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -206,7 +206,7 @@ pytest -v --cov=communication --cov=gcs --cov=simulator --cov=ui --cov-report=te
 ```
 
 ### Test Summary
-- **103 unit tests** passing with **85% overall coverage** (and >85% on core modules).
+- **104 unit tests** passing with **85% overall coverage** (and >85% on core modules).
 - Comprehensive test coverage across all boundary conditions, invalid data types, blackout timeouts, and malformed JSON packets.
 
 ---
